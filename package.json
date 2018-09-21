@@ -1,0 +1,23 @@
+{
+  "name": "next-page-map",
+  "version": "1.0.0",
+  "description": "Get a mapping of pathnames to filenames from a Next.js pages directory",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch"
+  },
+  "keywords": [
+    "next.js"
+  ],
+  "author": "Shawn Allen",
+  "license": "MIT",
+  "dependencies": {
+    "klaw-sync": "^5.0.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^7.0.0",
+    "jest": "^23.6.0",
+    "tmp": "0.0.33"
+  }
+}
