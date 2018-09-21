@@ -48,3 +48,5 @@ export default class extends App {
   }
 }
 ```
+
+[Next.js]: https://github.com/zeit/next.js
