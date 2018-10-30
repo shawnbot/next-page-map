@@ -3,9 +3,13 @@ const {basename, dirname, extname, join} = require('path')
 
 const INDEX_SUFFIX = '/index'
 
-module.exports = function getPageMap(dir, pageExtensions = ['js', 'jsx']) {
+module.exports = function getPageMap(dir, pageExtensions) {
   if (!dir) {
     dir = join(process.cwd(), 'pages')
+  }
+
+  if (!pageExtensions) {
+    pageExtensions = ['js', 'jsx']
   }
 
   function isPage(path) {
@@ -33,7 +37,7 @@ function removeIndexSuffix(path) {
     return '/'
   } else {
     return path.endsWith(INDEX_SUFFIX)
-      ? path.substr(0, -INDEX_SUFFIX.length)
+      ? path.substr(0, path.length - INDEX_SUFFIX.length)
       : path
   }
 }
