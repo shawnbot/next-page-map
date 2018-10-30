@@ -10,10 +10,55 @@ describe('getPageMap()', () => {
       'foo/index.js',
       'foo/bar.jsx'
     ]).then(dir => {
-      expect(getPageMap(dir)).toEqual({
+      expect(getPageMap({dir})).toEqual({
         '/': '/index.js',
         '/foo': '/foo/index.js',
         '/foo/bar': '/foo/bar.jsx'
+      })
+    })
+  })
+
+  it('respects pageExtentions', () => {
+    const pageExtensions = ['jsx']
+    return makeTestDir([
+      'index.js',
+      'foo/index.js',
+      'foo/bar.jsx'
+    ]).then(dir => {
+      expect(getPageMap({dir, pageExtensions})).toEqual({
+        '/foo/bar': '/foo/bar.jsx'
+      })
+    })
+  })
+
+  it('returns a nested tree with {nested: true}', () => {
+    return makeTestDir([
+      'index.js',
+      'foo/index.js',
+      'foo/bar.jsx'
+    ]).then(dir => {
+      expect(getPageMap({dir, nested: true})).toEqual({
+        path: '/',
+        file: '/index.js',
+        isIndex: true,
+        parent: '/',
+        children: [
+          {
+            path: '/foo',
+            file: '/foo/index.js',
+            isIndex: true,
+            parent: '/',
+            children: [
+              {
+                path: '/foo/bar',
+                file: '/foo/bar.jsx',
+                isIndex: false,
+                parent: '/foo',
+                children: []
+              }
+            ]
+          }
+        ]
       })
     })
   })
