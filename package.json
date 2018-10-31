@@ -1,6 +1,6 @@
 {
   "name": "next-page-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get a mapping of pathnames to filenames from a Next.js pages directory",
   "main": "index.js",
   "scripts": {
