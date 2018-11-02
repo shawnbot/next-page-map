@@ -61,16 +61,16 @@ function nest(map) {
   })
 
   let root = nodeMap['/']
-  if (root) {
-    nodes.splice(nodes.indexOf(root), 1)
-  } else {
-    console.warn('no root node found in:', nodeMap)
-    root = {path: '/', parent: null, children: []}
+  if (!root) {
+    const sorted = nodes.sort((a, b) => a.path.localeCompare(b.path))
+    root = sorted[0]
   }
 
+  // remove root from the list of nodes
+  nodes.splice(nodes.indexOf(root), 1)
+
   const rest = []
-  while (nodes.length) {
-    const node = nodes.shift()
+  for (const node of nodes) {
     const parent = nodeMap[node.parent]
     if (parent) {
       parent.children.push(node)
