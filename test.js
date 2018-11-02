@@ -71,6 +71,25 @@ describe('getPageMap()', () => {
         expect(getPageMap({dir, nested: true}).path).toEqual('/foo')
       })
     })
+
+    it('works with TreeModel#parse()', () => {
+      const TreeModel = require('tree-model')
+      return makeTestDir([
+        'index.js',
+        'foo/index.js',
+        'foo/bar.jsx'
+      ]).then(dir => {
+        const pages = getPageMap({dir, nested: true})
+        const tree = new TreeModel()
+        const root = tree.parse(pages)
+        expect(root.children.length).toBe(1)
+        const foo = root.children[0]
+        expect(foo.children.length).toBe(1)
+        const bar = foo.children[0]
+        expect(root.first(node => node.model.path === '/foo')).toEqual(foo)
+        expect(root.first(node => node.model.path === '/foo/bar')).toEqual(bar)
+      })
+    })
   })
 })
 
