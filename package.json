@@ -19,6 +19,7 @@
   "devDependencies": {
     "fs-extra": "^7.0.0",
     "jest": "^23.6.0",
-    "tmp": "0.0.33"
+    "tmp": "0.0.33",
+    "tree-model": "^1.0.7"
   }
 }
